@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Mode Selection";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="container">
+    <h3>Available modes:</h3>
+    <div>
+        <form asp-controller="Home" asp-action="ModeSelection" method="post">
+            <p class="btn btn-primary" asp-controller="Home" asp-action="ModeSelection">
+                <b>Binary (Yes or No)</b>  – this is the default mode
+            </p>
+            <p class="btn btn-primary" asp-controller="Home" asp-action="ModeSelection">
+                <b>Multiple choice questions</b> – showing three possible answers, one of which is correct.
+            </p>
+            <oncl
+        </form>
+    </div>
+</div>
