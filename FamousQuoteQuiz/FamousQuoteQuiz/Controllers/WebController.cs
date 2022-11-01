@@ -8,11 +8,10 @@
     {
         protected internal void SetModeSelection()
         {
-            this.ViewData["multipleSelection"] = "Selected";
             var isBinaryModeSelected = this.HttpContext.Session.GetString("BinaryModeIsSelected");
-            if (isBinaryModeSelected != null)
+            if (isBinaryModeSelected == null)
             {
-                this.ViewData["multipleSelection"] = null;
+                this.ViewData["multipleSelection"] = "Selected";
             }
         }
 

@@ -5,5 +5,7 @@
     public interface IBinaryQuoteService
     {
         BinaryQuoteViewModel GetQuote();
+
+        AnswerViewModel CheckAnswer(RequestViewModel requestViewModel);
     }
 }

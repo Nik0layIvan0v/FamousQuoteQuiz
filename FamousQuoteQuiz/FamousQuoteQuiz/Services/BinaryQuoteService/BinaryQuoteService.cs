@@ -31,14 +31,25 @@
             int totalAuthorRecords = this.dbContext.Authors.Count();
 
             Author? randomAuthor = null;
-            while (quote == null)
+            while (randomAuthor == null)
             {
                 int randomAuthorId = this.random.Next(1, totalAuthorRecords);
                 randomAuthor = this.dbContext.Authors.Where(author => author.Id == randomAuthorId).FirstOrDefault();
             }
 
-            var yesAnswerId = this.random.Next(1, int.MaxValue) % 2 == 0 ? randomAuthor.Id : correctAuthorId;
-            var noAnswerId = this.random.Next(1, int.MaxValue) % 3 == 0 ? correctAuthorId : randomAuthor.Id;
+            int noAnswerId = 0;
+            int yesAnswerId = 0;
+            int randomNumber = this.random.Next(1, int.MaxValue);
+            if (randomNumber % 2 == 0)
+            {
+                yesAnswerId = correctAuthorId;
+                noAnswerId = randomAuthor.Id;
+            }
+            else
+            {
+                yesAnswerId = randomAuthor.Id;
+                noAnswerId = correctAuthorId;
+            }
 
             return new BinaryQuoteViewModel()
             {
