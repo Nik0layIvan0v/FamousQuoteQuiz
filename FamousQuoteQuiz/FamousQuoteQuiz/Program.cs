@@ -1,5 +1,10 @@
 namespace FamousQuoteQuiz
 {
+    using FamousQuoteQuiz.Data;
+    using FamousQuoteQuiz.Extensions;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+
     public class Program
     {
         public static void Main(string[] args)
@@ -7,6 +12,7 @@ namespace FamousQuoteQuiz
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddControllersWithViews()
                             .AddRazorRuntimeCompilation();
+            builder.Services.AddDatabaseDeveloperPageExceptionFilter();
             builder.Services.Configure<RouteOptions>(options =>
             {
                 options.LowercaseUrls = true;
@@ -14,14 +20,19 @@ namespace FamousQuoteQuiz
                 options.AppendTrailingSlash = true;
             });
 
+            string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+            builder.Services.AddDbContext<FamousQuoteQuizDbContext>(options => options.UseSqlServer(connectionString));
+
             var app = builder.Build();
-            if (!app.Environment.IsDevelopment())
+            if (app.Environment.IsDevelopment() == false)
             {
-                app.UseExceptionHandler("/Home/Error");
-                app.UseHsts();
+                app.UseExceptionHandler("/Home/Error")
+                   .UseHsts();
             }
 
-            app.UseHttpsRedirection()
+            app.ApplyMigrations()
+               .InitializeData()
+               .UseHttpsRedirection()
                .UseStaticFiles()
                .UseRouting()
                .UseAuthorization();
