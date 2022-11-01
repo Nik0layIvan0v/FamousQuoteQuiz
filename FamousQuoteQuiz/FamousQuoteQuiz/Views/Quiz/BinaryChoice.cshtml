@@ -11,8 +11,8 @@
             <p class="card-text">@Model.Content</p>
             <div class="center">
                 <h5 class="card-title center">@Model.SugestedAuthorName?</h5>
-                <a asp-controller="Quiz" asp-action="BinaryChoiceResult" asp-route-AuthorId="@Model.YesAnswerId" asp-route-QuoteId="@Model.QuoteId" class="card-link btn btn-outline-info col-4">Yes</a>
-                <a asp-controller="Quiz" asp-action="BinaryChoiceResult" asp-route-AuthorId="@Model.NoAnswerId" asp-route-QuoteId="@Model.QuoteId" class="card-link btn btn-outline-info col-4">No</a>
+                <a asp-controller="Quiz" asp-action="BinaryChoiceResult" asp-route-AuthorId="@Model.YesAnswerId" asp-route-QuoteId="@Model.QuoteId" asp-route-IsYesSelected="true" class="card-link btn btn-outline-info col-4">Yes</a>
+                <a asp-controller="Quiz" asp-action="BinaryChoiceResult" asp-route-AuthorId="@Model.NoAnswerId" asp-route-QuoteId="@Model.QuoteId" asp-route-IsYesSelected="false" class="card-link btn btn-outline-info col-4">No</a>
             </div>
         </div>
     </div>

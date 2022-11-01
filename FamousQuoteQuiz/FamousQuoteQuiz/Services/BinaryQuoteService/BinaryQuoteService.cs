@@ -78,7 +78,7 @@
                                               .Select(quote => quote.Author.Name)
                                               .FirstOrDefault();
 
-            if (answeredAuthor == correctAuthor)
+            if (answeredAuthor == correctAuthor && requestViewModel.IsYesSelected)
             {
                 return new AnswerViewModel()
                 {
@@ -88,7 +88,7 @@
 
             return new AnswerViewModel()
             {
-                AnswerText = string.Format(WrongAnswer, answeredAuthor)
+                AnswerText = string.Format(WrongAnswer, correctAuthor)
             };
         }
     }
