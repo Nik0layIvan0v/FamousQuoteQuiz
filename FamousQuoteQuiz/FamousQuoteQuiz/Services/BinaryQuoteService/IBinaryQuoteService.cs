@@ -6,6 +6,6 @@
     {
         BinaryQuoteViewModel GetQuote();
 
-        AnswerViewModel CheckAnswer(RequestViewModel requestViewModel);
+        AnswerViewModel CheckAnswer(RequestAnswerViewModel requestViewModel);
     }
 }

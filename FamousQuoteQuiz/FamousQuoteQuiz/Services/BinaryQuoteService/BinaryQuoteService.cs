@@ -61,12 +61,34 @@
             };
         }
 
-        public AnswerViewModel CheckAnswer(RequestViewModel requestViewModel)
+        public AnswerViewModel CheckAnswer(RequestAnswerViewModel requestViewModel)
         {
+            if (requestViewModel == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            var answeredAuthor = this.dbContext.Authors
+                                               .Where(author => author.Id == requestViewModel.AuthorId)
+                                               .Select(author => author.Name)
+                                               .FirstOrDefault();
+
+            var correctAuthor = this.dbContext.Quotes
+                                              .Where(quote => quote.Id == requestViewModel.QuoteId)
+                                              .Select(quote => quote.Author.Name)
+                                              .FirstOrDefault();
+
+            if (answeredAuthor == correctAuthor)
+            {
+                return new AnswerViewModel()
+                {
+                    AnswerText = string.Format(CorrectAnswer, correctAuthor)
+                };
+            }
 
             return new AnswerViewModel()
             {
-
+                AnswerText = string.Format(WrongAnswer, answeredAuthor)
             };
         }
     }

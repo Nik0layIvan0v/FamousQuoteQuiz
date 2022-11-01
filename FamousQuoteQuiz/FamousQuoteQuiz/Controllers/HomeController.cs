@@ -25,7 +25,7 @@
         {
             if (modeselection.Equals("BinaryMode") == true)
             {
-                this.HttpContext.Session.SetString("BinaryModeIsSelected", "");
+                this.HttpContext.Session.SetString("BinaryModeIsSelected", "selected");
                 this.ViewData["multipleSelection"] = null;
             }
             else

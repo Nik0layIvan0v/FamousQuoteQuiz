@@ -1,5 +1,6 @@
 ﻿namespace FamousQuoteQuiz.Controllers
 {
+    using FamousQuoteQuiz.Models;
     using FamousQuoteQuiz.Services.BinaryQuoteService;
     using FamousQuoteQuiz.Services.MultipleChoiceService;
     using Microsoft.AspNetCore.Mvc;
@@ -23,17 +24,12 @@
             return View(quote);
         }
 
-        //[HttpPost]
-        //public IActionResult BinaryChoice(BinaryQuoteViewModel binaryQuoteView)
-        //{
-        //    this.SetModeSelection();
-        //    if (this.ModelState.IsValid == false)
-        //    {
-        //        return this.BinaryChoice();
-        //    }
-
-        //    return View();
-        //}
+        public IActionResult BinaryChoiceResult(RequestAnswerViewModel requestViewModel)
+        {
+            this.SetModeSelection();
+            var answer = this.binaryQuoteService.CheckAnswer(requestViewModel);
+            return View(answer);
+        }
 
         //GET
         public IActionResult MultipleChoice()
@@ -42,8 +38,8 @@
             return View();
         }
 
-        [HttpPost]
-        public IActionResult MultipleChoice(string data)
+
+        public IActionResult MultipleChoiceResult(string data)
         {
             this.SetModeSelection();
             return View();
