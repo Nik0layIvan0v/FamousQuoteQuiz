@@ -2,6 +2,8 @@ namespace FamousQuoteQuiz
 {
     using FamousQuoteQuiz.Data;
     using FamousQuoteQuiz.Extensions;
+    using FamousQuoteQuiz.Services.BinaryQuoteService;
+    using FamousQuoteQuiz.Services.MultipleChoiceService;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
 
@@ -19,6 +21,9 @@ namespace FamousQuoteQuiz
                 options.LowercaseQueryStrings = true;
                 options.AppendTrailingSlash = true;
             });
+
+            builder.Services.AddTransient<IBinaryQuoteService, BinaryQuoteService>();
+            builder.Services.AddTransient<IMultipleQuoteService, MultipleQuoteService>();
 
             builder.Services.AddSession(options =>
             {
