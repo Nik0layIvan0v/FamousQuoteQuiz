@@ -6,20 +6,14 @@
 
     public abstract class WebController : Controller
     {
-        protected ModeSelection GetModeSelection()
+        protected void SetModeSelection()
         {
-            var selectedMode = new ModeSelection()
-            {
-                IsBinaryModeSelected = false
-            };
-
+            this.ViewData["multipleSelection"] = "Selected";
             var isBinaryModeSelected = this.HttpContext.Session.GetString("BinaryModeIsSelected");
             if (isBinaryModeSelected != null)
             {
-                selectedMode.IsBinaryModeSelected = true;
+                this.ViewData["multipleSelection"] = null;
             }
-
-            return selectedMode;
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -13,8 +13,8 @@ namespace FamousQuoteQuiz.Controllers
         //GET
         public IActionResult BinaryChoice()
         {
-            var selectedMode = this.GetModeSelection();
-            return View(selectedMode);
+            this.SetModeSelection();
+            return View();
         }
 
         //POST
@@ -27,8 +27,8 @@ namespace FamousQuoteQuiz.Controllers
         //GET
         public IActionResult MultipleChoice()
         {
-            var selectedMode = this.GetModeSelection();
-            return View(selectedMode);
+            this.SetModeSelection();
+            return View();
         }
 
         //POST

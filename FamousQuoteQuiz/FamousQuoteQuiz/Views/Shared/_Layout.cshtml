@@ -1,8 +1,6 @@
 ﻿@{
-    ViewBag.IsSelectedBinary = true;
+    var multipleSelection = ViewData["multipleSelection"];
 }
-
-@model ModeSelection;
 
 <!DOCTYPE html>
 <html lang="en">
@@ -33,7 +31,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Home" asp-action="ModeSelection">
                                 Selected mode:
-                                @if (Model.IsBinaryModeSelected == true)
+                                @if (multipleSelection == null)
                                 {
                                     <b>Binary (Yes/No)</b>
                                 }

@@ -10,14 +10,14 @@
 
         public IActionResult Index()
         {
-            var selectedMode = this.GetModeSelection();
-            return View(selectedMode);
+            this.SetModeSelection();
+            return View();
         }
 
         public IActionResult ModeSelection()
         {
-            var selectedMode = this.GetModeSelection();
-            return View(selectedMode);
+            this.SetModeSelection();
+            return View();
         }
 
         [HttpPost]
@@ -25,11 +25,13 @@
         {
             if (modeselection.Equals("BinaryMode") == true)
             {
-                this.HttpContext.Session.SetString("BinaryModeIsSelected" , "true");
+                this.HttpContext.Session.SetString("BinaryModeIsSelected", "true");
+                this.ViewData["multipleSelection"] = null;
             }
             else
             {
                 this.HttpContext.Session.Remove("BinaryModeIsSelected");
+                this.ViewData["multipleSelection"] = "BinaryModeIsSelected";
             }
 
             return RedirectToAction("Index");
@@ -37,8 +39,9 @@
 
         public IActionResult StartQuiz()
         {
-            var selectedMode = this.GetModeSelection();
-            if (selectedMode.IsBinaryModeSelected == true)
+            this.SetModeSelection();
+            var selectedMode = this.ViewData["multipleSelection"];
+            if (selectedMode == null)
             {
                 return RedirectToAction("BinaryChoice", "Quiz");
             }

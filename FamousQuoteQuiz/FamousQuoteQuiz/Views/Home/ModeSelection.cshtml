@@ -1,7 +1,6 @@
-﻿@model ModeSelection;
-@{
+﻿@{
     ViewData["Title"] = "Mode Selection";
-    bool isBinarySelected = Model.IsBinaryModeSelected;
+    bool isBinarySelected = this.ViewData["multipleSelection"] == null;
     string BinaryModeSelected = "";
     string MultipleChoice = "";
     if (isBinarySelected == true)
