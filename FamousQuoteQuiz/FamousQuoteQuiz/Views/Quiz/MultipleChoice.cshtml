@@ -1,3 +1,33 @@
 ﻿@{
     ViewData["Title"] = "Multiple Choice";
 }
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Who Said it?</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <form method="post" asp-controller="Home" asp-action="ModeSelection">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="modeselection" value="BinaryMode" id="BinaryMode">
+                <label class="form-check-label" for="BinaryMode">
+                    <b>Binary (Yes or No)</b>  – this is the default mode
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="modeselection" value="MultipleChoice" id="MultipleChoice">
+                <label class="form-check-label" for="MultipleChoice">
+                    <b>Multiple choice questions</b> – showing three possible answers, one of which is correct.
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="modeselection" value="MultipleChoice" id="MultipleChoice">
+                <label class="form-check-label" for="MultipleChoice">
+                    <b>Multiple choice questions</b> – showing three possible answers, one of which is correct.
+                </label>
+            </div>
+            <div class="pt-3">
+                <input type="submit" class="btn btn-outline-info center" />
+            </div>
+        </form>
+    </div>
+</div>
