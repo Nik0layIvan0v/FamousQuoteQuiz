@@ -2,7 +2,6 @@
 {
     using FamousQuoteQuiz.Data.EntityModels;
     using Newtonsoft.Json;
-    using Newtonsoft.Json.Linq;
 
     public static class DbInitializer
     {
@@ -49,13 +48,14 @@
                         {
                             Author = author,
                             Content = quoteContet.Length <= 50 ? quoteContet : quoteContet.Substring(0, 50)
-                    };
+                        };
 
-                    context.Quotes.Add(dbQuote);
+                        context.Quotes.Add(dbQuote);
+                    }
                 }
+
+                context.SaveChanges();
             }
-            context.SaveChanges();
-        }
         }
     }
 }

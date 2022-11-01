@@ -1,19 +1,31 @@
-﻿@{
+﻿@model ModeSelection;
+@{
     ViewData["Title"] = "Mode Selection";
+    bool isBinarySelected = Model.IsBinaryModeSelected;
 }
+
 
 <h1>@ViewData["Title"]</h1>
 
 <div class="container">
     <h3>Available modes:</h3>
     <div>
-        <form asp-controller="Home" asp-action="ModeSelection" method="post">
-            <p class="btn btn-primary" asp-controller="Home" asp-action="ModeSelection">
-                <b>Binary (Yes or No)</b>  – this is the default mode
-            </p>
-            <p class="btn btn-primary" asp-controller="Home" asp-action="ModeSelection">
-                <b>Multiple choice questions</b> – showing three possible answers, one of which is correct.
-            </p>
+        <form method="post" asp-controller="Home" asp-action="ModeSelection">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="modeselection" value="BinaryMode" id="BinaryMode" @isBinarySelected == true ? checked : "">
+                <label class="form-check-label" for="BinaryMode">
+                    <b>Binary (Yes or No)</b>  – this is the default mode
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="modeselection" value="MultipleChoice" id="MultipleChoice" @isBinarySelected == false ? checked : "">
+                <label class="form-check-label" for="MultipleChoice">
+                    <b>Multiple choice questions</b> – showing three possible answers, one of which is correct.
+                </label>
+            </div>
+            <div>
+                <input type="submit" class="btn btn-primary center" />
+            </div>
         </form>
     </div>
 </div>

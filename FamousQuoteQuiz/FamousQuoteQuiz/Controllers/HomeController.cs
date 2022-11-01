@@ -1,10 +1,8 @@
 ﻿namespace FamousQuoteQuiz.Controllers
 {
-    using FamousQuoteQuiz.Models;
     using Microsoft.AspNetCore.Mvc;
-    using System.Diagnostics;
 
-    public class HomeController : Controller
+    public class HomeController : WebController
     {
         public HomeController()
         {
@@ -12,18 +10,40 @@
 
         public IActionResult Index()
         {
-            return View();
+            var selectedMode = this.GetModeSelection();
+            return View(selectedMode);
         }
 
         public IActionResult ModeSelection()
         {
-            return View();
+            var selectedMode = this.GetModeSelection();
+            return View(selectedMode);
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        [HttpPost]
+        public IActionResult ModeSelection(string modeselection)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            if (modeselection.Equals("BinaryMode") == true)
+            {
+                this.HttpContext.Session.SetString("BinaryModeIsSelected" , "true");
+            }
+            else
+            {
+                this.HttpContext.Session.Remove("BinaryModeIsSelected");
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult StartQuiz()
+        {
+            var selectedMode = this.GetModeSelection();
+            if (selectedMode.IsBinaryModeSelected == true)
+            {
+                return RedirectToAction("BinaryChoice", "Quiz");
+            }
+
+            return RedirectToAction("MultipleChoice", "Quiz");
         }
     }
 }

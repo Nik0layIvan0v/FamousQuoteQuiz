@@ -20,6 +20,13 @@ namespace FamousQuoteQuiz
                 options.AppendTrailingSlash = true;
             });
 
+            builder.Services.AddSession(options =>
+            {
+                options.Cookie.Name = "BinaryModeIsSelected";
+                options.Cookie.IsEssential = true;
+                options.Cookie.HttpOnly = true;
+            });
+
             string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
             builder.Services.AddDbContext<FamousQuoteQuizDbContext>(options => options.UseSqlServer(connectionString));
 
@@ -35,11 +42,13 @@ namespace FamousQuoteQuiz
                .UseHttpsRedirection()
                .UseStaticFiles()
                .UseRouting()
-               .UseAuthorization();
+               .UseAuthorization()
+               .UseSession();
 
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+
             app.Run();
         }
     }
