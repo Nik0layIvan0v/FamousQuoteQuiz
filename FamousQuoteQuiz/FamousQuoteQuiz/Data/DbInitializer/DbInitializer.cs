@@ -9,10 +9,11 @@
         public static void Initialize(this FamousQuoteQuizDbContext context)
         {
             context.Database.EnsureCreated();
-            //if (context.Authors.Any() == true)
-            //{
-            //    return;
-            //}
+            if (context.Authors.Any() == true)
+            {
+                return;
+            }
+
             string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
             string authorsPath = Path.Combine(baseDirectory, "..\\..\\..\\Data\\DbInitializer\\Authors.json");
             string authorJson = File.ReadAllText(authorsPath);
