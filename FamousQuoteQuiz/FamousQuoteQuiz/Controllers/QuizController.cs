@@ -35,7 +35,8 @@
         public IActionResult MultipleChoice()
         {
             this.SetModeSelection();
-            return View();
+            var quoteViewModel = this.multipleQuoteService.GetQuote();
+            return View(quoteViewModel);
         }
 
 
