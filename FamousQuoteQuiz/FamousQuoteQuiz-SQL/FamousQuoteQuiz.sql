@@ -4,26 +4,26 @@
 --DROP DATABASE [FamousQuoteQuiz]
 --GO
 
-CREATE DATABASE [FamousQuoteQuiz]
-GO
+--CREATE DATABASE [FamousQuoteQuiz]
+--GO
 
-USE [FamousQuoteQuiz]
-GO
+--USE [FamousQuoteQuiz]
+--GO
 
-CREATE TABLE Authors (
-    Id int NOT NULL PRIMARY KEY IDENTITY(1,1),
-	AuthorName NVARCHAR(50) NOT NULL,
-)
-GO
+--CREATE TABLE Authors (
+--    Id int NOT NULL PRIMARY KEY IDENTITY(1,1),
+--	AuthorName NVARCHAR(50) NOT NULL,
+--)
+--GO
 
-CREATE TABLE Quotes (
-    Id int NOT NULL PRIMARY KEY IDENTITY(1,1),
-	Content NVARCHAR(100) NOT NULL,
-	AuthorID int FOREIGN KEY REFERENCES Authors(Id)
-)
-GO
+--CREATE TABLE Quotes (
+--    Id int NOT NULL PRIMARY KEY IDENTITY(1,1),
+--	Content NVARCHAR(100) NOT NULL,
+--	AuthorID int FOREIGN KEY REFERENCES Authors(Id)
+--)
+--GO
 
-INSERT INTO Authors (AuthorName)
+INSERT INTO Authors (Name)
 	VALUES ('Bekki'),
 		   ('Brenna'),
 		   ('Pablo'),
@@ -1026,7 +1026,7 @@ INSERT INTO Authors (AuthorName)
 		   ('Daryle')
 GO
 
-insert into Quotes (AuthorID, Content) values (94, 'ut at dolor quis odio consequat varius integer ac leo');
+insert into Quotes (AuthorId, Content) values (94, 'ut at dolor quis odio consequat varius integer ac leo');
 insert into Quotes (AuthorID, Content) values (39, 'adipiscing lorem vitae mattis nibh ligula nec sem duis aliquam');
 insert into Quotes (AuthorID, Content) values (827, 'rhoncus mauris enim leo rhoncus sed vestibulum sit amet cursus');
 insert into Quotes (AuthorID, Content) values (393, 'orci nullam molestie nibh in lectus pellentesque at nulla suspendisse');
