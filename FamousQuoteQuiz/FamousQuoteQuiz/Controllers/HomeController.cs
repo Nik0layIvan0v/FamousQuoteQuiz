@@ -25,13 +25,13 @@
         {
             if (modeselection.Equals("BinaryMode") == true)
             {
-                this.HttpContext.Session.SetString("BinaryModeIsSelected", "true");
+                this.HttpContext.Session.SetString("BinaryModeIsSelected", "");
                 this.ViewData["multipleSelection"] = null;
             }
             else
             {
                 this.HttpContext.Session.Remove("BinaryModeIsSelected");
-                this.ViewData["multipleSelection"] = "BinaryModeIsSelected";
+                this.ViewData["multipleSelection"] = "Selected";
             }
 
             return RedirectToAction("Index");

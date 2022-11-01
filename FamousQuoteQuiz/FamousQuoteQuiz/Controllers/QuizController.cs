@@ -1,28 +1,39 @@
-﻿using FamousQuoteQuiz.Models;
-using Microsoft.AspNetCore.Mvc;
-
-namespace FamousQuoteQuiz.Controllers
+﻿namespace FamousQuoteQuiz.Controllers
 {
+    using FamousQuoteQuiz.Services.BinaryQuoteService;
+    using FamousQuoteQuiz.Services.MultipleChoiceService;
+    using Microsoft.AspNetCore.Mvc;
+
     public class QuizController : WebController
     {
-        public QuizController()
+        private readonly IBinaryQuoteService binaryQuoteService;
+        private readonly IMultipleQuoteService multipleQuoteService;
+
+        public QuizController(IBinaryQuoteService binaryQuoteService, IMultipleQuoteService multipleQuoteService)
         {
-            //ADD SERVICE!!!
+            this.binaryQuoteService = binaryQuoteService;
+            this.multipleQuoteService = multipleQuoteService;
         }
 
         //GET
         public IActionResult BinaryChoice()
         {
             this.SetModeSelection();
-            return View();
+            var quote = this.binaryQuoteService.GetQuote();
+            return View(quote);
         }
 
-        //POST
-        [HttpPost]
-        public IActionResult BinaryChoice(string data)
-        {
-            return View();
-        }
+        //[HttpPost]
+        //public IActionResult BinaryChoice(BinaryQuoteViewModel binaryQuoteView)
+        //{
+        //    this.SetModeSelection();
+        //    if (this.ModelState.IsValid == false)
+        //    {
+        //        return this.BinaryChoice();
+        //    }
+
+        //    return View();
+        //}
 
         //GET
         public IActionResult MultipleChoice()
@@ -31,10 +42,10 @@ namespace FamousQuoteQuiz.Controllers
             return View();
         }
 
-        //POST
         [HttpPost]
         public IActionResult MultipleChoice(string data)
         {
+            this.SetModeSelection();
             return View();
         }
     }

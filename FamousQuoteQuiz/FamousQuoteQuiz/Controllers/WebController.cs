@@ -6,7 +6,7 @@
 
     public abstract class WebController : Controller
     {
-        protected void SetModeSelection()
+        protected internal void SetModeSelection()
         {
             this.ViewData["multipleSelection"] = "Selected";
             var isBinaryModeSelected = this.HttpContext.Session.GetString("BinaryModeIsSelected");
