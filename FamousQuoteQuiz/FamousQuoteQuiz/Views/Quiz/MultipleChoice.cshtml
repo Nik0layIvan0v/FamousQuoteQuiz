@@ -2,30 +2,26 @@
     ViewData["Title"] = "Multiple Choice";
 }
 
+@model MultipleChoiceViewModel
+
 <div class="card">
     <div class="card-body">
         <h5 class="card-title">Who Said it?</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <form method="post" asp-controller="Home" asp-action="ModeSelection">
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="modeselection" value="BinaryMode" id="BinaryMode">
-                <label class="form-check-label" for="BinaryMode">
-                    <b>Binary (Yes or No)</b>  – this is the default mode
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="modeselection" value="MultipleChoice" id="MultipleChoice">
-                <label class="form-check-label" for="MultipleChoice">
-                    <b>Multiple choice questions</b> – showing three possible answers, one of which is correct.
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="modeselection" value="MultipleChoice" id="MultipleChoice">
-                <label class="form-check-label" for="MultipleChoice">
-                    <b>Multiple choice questions</b> – showing three possible answers, one of which is correct.
-                </label>
-            </div>
+        <p class="card-text">@Model.QuoteText</p>
+        <form method="post" asp-controller="Quiz" asp-action="MultipleChoice">
+
+            @foreach (var author in Model.Authors)
+            {
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="authorId" value="@author.Id" id="authorId">
+                    <label class="form-check-label" for="authorId">
+                        <b>@author.Name</b>
+                    </label>
+                </div>
+            }
+            
             <div class="pt-3">
+                <input type="hidden" name="quoteId" value="@Model.QuoteId" />
                 <input type="submit" class="btn btn-outline-info center" />
             </div>
         </form>

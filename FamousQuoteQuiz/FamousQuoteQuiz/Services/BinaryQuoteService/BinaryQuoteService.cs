@@ -78,7 +78,7 @@
                                               .Select(quote => quote.Author.Name)
                                               .FirstOrDefault();
 
-            if (answeredAuthor == correctAuthor && requestViewModel.IsYesSelected)
+            if (answeredAuthor == correctAuthor)
             {
                 return new AnswerViewModel()
                 {

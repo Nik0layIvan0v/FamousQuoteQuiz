@@ -8,6 +8,7 @@
     public class QuizController : WebController
     {
         private readonly IBinaryQuoteService binaryQuoteService;
+
         private readonly IMultipleQuoteService multipleQuoteService;
 
         public QuizController(IBinaryQuoteService binaryQuoteService, IMultipleQuoteService multipleQuoteService)
@@ -16,7 +17,6 @@
             this.multipleQuoteService = multipleQuoteService;
         }
 
-        //GET
         public IActionResult BinaryChoice()
         {
             this.SetModeSelection();
@@ -31,7 +31,6 @@
             return View(answer);
         }
 
-        //GET
         public IActionResult MultipleChoice()
         {
             this.SetModeSelection();
@@ -39,11 +38,18 @@
             return View(quoteViewModel);
         }
 
-
-        public IActionResult MultipleChoiceResult(string data)
+        [HttpPost]
+        public IActionResult MultipleChoice(RequestAnswerViewModel requestViewModel)
         {
             this.SetModeSelection();
-            return View();
+            var answer = this.binaryQuoteService.CheckAnswer(requestViewModel);
+            return RedirectToAction(nameof(MultipleChoiceResult), answer);
+        }
+
+        public IActionResult MultipleChoiceResult(AnswerViewModel answerViewModel)
+        {
+            this.SetModeSelection();
+            return View(answerViewModel);
         }
     }
 }
