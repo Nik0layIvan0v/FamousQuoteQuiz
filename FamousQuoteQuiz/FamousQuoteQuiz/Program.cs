@@ -25,7 +25,10 @@ namespace FamousQuoteQuiz
             builder.Services.AddTransient<IBinaryQuoteService, BinaryQuoteService>();
             builder.Services.AddTransient<IMultipleQuoteService, MultipleQuoteService>();
             builder.Services.AddTransient<Random>();
-            builder.Services.AddSession();
+            builder.Services.AddSession(option =>
+            {
+                option.Cookie.HttpOnly = true;
+            });
 
             string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
             builder.Services.AddDbContext<FamousQuoteQuizDbContext>(options => options.UseSqlServer(connectionString));
